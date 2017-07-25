@@ -3,17 +3,14 @@ import { getAudioDetails } from '../actions'
 import AudioTitles from '../components/AudioTitles'
 
 const mapStateToProps = (state) => ({
-  audioTitles: state.length ===0 ? [] : getTitles(state)
+  audioTitles: state.length === 0 ? [] : state.response.audioTitles
 })
 
-const mapDispatchToProps = {
-  onTitleClick: getAudioDetails
-}
-
-const getTitles = (state) => {
-  console.log(state[0].audioTitles);
-  return state[0].audioTitles;
-}
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  onTitleClick: (id) => {
+    dispatch(getAudioDetails(id))
+  }
+})
 
 const ListAudioTitles = connect(
   mapStateToProps,

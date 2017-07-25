@@ -8,7 +8,7 @@ const AudioTitles = ({ audioTitles, onTitleClick }) => (
       <AudioTitle
         key={title.id}
         {...title}
-        onClick={() => onTitleClick(title.id)}
+        onClick={onTitleClick}
       />
       
     )}

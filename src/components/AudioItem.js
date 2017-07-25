@@ -1,7 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
-const AudioItem = (audioItem) =>
-    (
+const AudioItem = ({ audioItem, dispatch }) => {
+    let isEmpty = audioItem === undefined || audioItem.length === 0;
+    return isEmpty ? <div></div> :
         <table>
             <tr>
                 <td>id</td>
@@ -28,7 +30,12 @@ const AudioItem = (audioItem) =>
                 <td>{audioItem.downloadable}</td>
             </tr>
         </table>
-    )
+}
 
-
+AudioItem.propTypes = {
+    description: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    publisher: PropTypes.string.isRequired,
+}
 export default AudioItem
