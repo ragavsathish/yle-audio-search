@@ -13,7 +13,7 @@ let SearchAudio = ({ dispatch }) => {
                     return
                 }
                 dispatch(searchAudioTitles(input.value))
-                input.value = ''
+                
             }}>
                 <input ref={node => {
                     input = node

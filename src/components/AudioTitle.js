@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const AudioTitle = ({ onClick, text }) => (
+const AudioTitle = ({ onClick, title, id }) => (
     <li onClick={onClick}>
-        {text}
+        {title}
     </li>
+    
 )
 
 AudioTitle.propTypes = {

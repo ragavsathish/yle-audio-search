@@ -10,6 +10,7 @@ const AudioTitles = ({ audioTitles, onTitleClick }) => (
         {...title}
         onClick={() => onTitleClick(title.id)}
       />
+      
     )}
   </ul>
 )

@@ -1,7 +1,8 @@
-const audioItems = (state = [{ audioTitles: [], selectedId: [], items: [] }], action) => {
+const audioItems = (state = [], action) => {
     switch (action.type) {
-        case 'SEARCH_AUDIO_BY_NAME':
-            return [...state, getMockedAudioItems(action.searchText)]
+        case 'SEARCH_AUDIO_BY_TITLE':
+            let mock = getMockedAudioItems(action.searchText)
+            return [...state, mock]
         case 'GET_AUDIO_DETAILS':
             return [
                 ...state, { selectedId: action.selectedId }
@@ -14,36 +15,37 @@ const audioItems = (state = [{ audioTitles: [], selectedId: [], items: [] }], ac
 export default audioItems
 
 const getMockedAudioItems = (text) => {
+
     return {
-        "audioTitles": [
+        audioTitles: [
             {
-                "title": "abc-def",
-                "id": "1-101"
+                title: "abc-def",
+                id: "1-101"
             },
             {
-                "title": "abc-def-ghi",
-                "id": "1-102"
+                title: "abc-def-ghi",
+                id: "1-102"
             }
         ],
 
-        "selectedId": "1-101",
+        selectedId: "1-101",
 
-        "items": [
+        items: [
             {
-                "id": "1-101",
-                "title": "abc-def",
-                "description": "desc some text",
-                "type": "radioSeries",
-                "publisher": "yle-radio-service",
-                "downloadable": true
+                id: "1-101",
+                title: "abc-def",
+                description: "desc some text",
+                type: "radioSeries",
+                publisher: "yle-radio-service",
+                downloadable: true
             },
             {
-                "id": "1-102",
-                "title": "abc-def",
-                "description": "desc some text",
-                "type": "radioSeries",
-                "publisher": "yle-radio-service",
-                "downloadable": true
+                id: "1-102",
+                title: "abc-def",
+                description: "desc some text",
+                type: "radioSeries",
+                publisher: "yle-radio-service",
+                downloadable: true
             }
         ]
     }
