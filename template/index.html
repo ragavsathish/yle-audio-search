@@ -1,0 +1,168 @@
+<html>
+
+<head>
+    <style type="text/css">
+        .logo {
+
+            width: 500px;
+            margin: 50px auto 50px;
+            overflow: hidden;
+        }
+
+        #search {
+            background-color: #eaf8fc;
+            background-image: linear-gradient(#fff, #d4e8ec);
+            border-radius: 35px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #c4d9df #a4c3ca #83afb7;
+            width: 500px;
+            height: 35px;
+            padding: 10px;
+            margin: 50px auto 50px;
+            overflow: hidden;
+        }
+
+        #searchText {
+            padding: 5px 9px;
+            height: 23px;
+            width: 380px;
+            border: 1px solid #a4c3ca;
+            font: normal 13px 'trebuchet MS', arial, helvetica;
+            background: #f1f1f1;
+            border-radius: 50px 3px 3px 50px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset, 0 1px 0 rgba(255, 255, 255, 1);
+        }
+
+        #searchButton {
+            background-color: #6cbb6b;
+            background-image: linear-gradient(#95d788, #6cbb6b);
+            border-radius: 3px 50px 50px 3px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: #7eba7c #578e57 #447d43;
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0.3),
+            0 1px 0 rgba(255, 255, 255, 0.3) inset;
+            height: 35px;
+            margin: 0 0 0 10px;
+            padding: 0;
+            width: 90px;
+            cursor: pointer;
+            font: bold 14px Arial, Helvetica;
+            color: #23441e;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        #searchButton:hover {
+            background-color: #95d788;
+            background-image: linear-gradient(#6cbb6b, #95d788);
+        }
+
+        #searchButton:active {
+            background: #95d788;
+            outline: none;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) inset;
+        }
+
+        #searchButton::-moz-focus-inner {
+            border: 0;
+            /* Small centering fix for Firefox */
+        }
+
+
+        #searchResult {
+            margin: 2px auto 2px;
+            width: 500px;
+            overflow: hidden;
+
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 14px;
+            padding: 15px 16px;
+            background-color: #f2f2f2;
+            
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            font-size: 14px;
+            margin: 20px auto 2px;
+            background: white;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo">
+        <img src="bg-text.png"></img>
+    </div>
+    <div>
+        <form id="search">
+            <input id='searchText' type="text">
+            <input id='searchButton' type="button" value="Search">
+        </form>
+    </div>
+    <div>
+        <div id="searchResult">
+            <div> <img src="noun_1160991_cc.png" style="height: 50px; width: 50px;"/> <span style="position: relative;top : -20px; left: 20px"> asdasd </span>
+             <img src="noun_759331_cc.png" style="height: 50px; width: 50px; float:right"/>    
+            </div>
+          
+  <table>
+            <tr>
+                <td>id</td>
+                <td>{audioItem.id}</td>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>{audioItem.title}</td>
+            </tr>
+            <tr>
+                <td>description</td>
+                <td>{audioItem.description}</td>
+            </tr>
+            <tr>
+                <td>type</td>
+                <td>{audioItem.type}</td>
+            </tr>
+            <tr>
+                <td>publisher</td>
+                <td>{audioItem.publisher}</td>
+            </tr>
+            <tr>
+                <td>downloadable</td>
+                <td>{audioItem.downloadable}</td>
+            </tr>
+        </table>
+      
+        </div>
+        <div style="background-color:white;height: 1px;"></div>
+
+        <div id="searchResult">
+            <div> <img src="noun_1160991_cc.png" style="height: 50px; width: 50px;"/> <span style="position: relative;top : -20px; left: 20px"> asdasd </span>
+             <img src="noun_759331_cc.png" style="height: 50px; width: 50px; float:right"/>       
+            </div>
+
+        </div>
+        <div style="background-color:white;height: 1px;"></div>
+        <div id="searchResult">
+            <div> <img src="noun_1160991_cc.png" style="height: 50px; width: 50px;"/> <span style="position: relative;top : -20px; left: 20px"> asdasd </span>
+             <img src="noun_759331_cc.png" style="height: 50px; width: 50px; float:right"/>    
+            </div>
+        </div>
+        <div style="background-color:white;height: 1px;"></div>
+
+        <div id="searchResult">
+            <div>abc </div>
+        </div>
+    </div>
+</body>
+
+</html>
