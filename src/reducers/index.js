@@ -1,23 +1,22 @@
-const expandSelection = (audioTitle, action) => {
-    if (action.selectedId !== audioTitle.id)
+const expandSelection = (audioTitle, selectedId) => {
+    if (selectedId !== audioTitle.id)
         return { ...audioTitle, expand: false }
     return { ...audioTitle, expand: !audioTitle.expand };
-
 }
 
 
-const audioItems = (state = [], action) => {
+const audioItems = (state = { ids: [], audioTitles: [], items: [] }, action) => {
     switch (action.type) {
         case 'SEARCH_AUDIO_BY_TITLE':
-            let mock = getMockedAudioItems(action.searchText);
-            console.log(mock)
-            return { ...state, response: mock.response }
+            const response = getMockedAudioItems(action.searchText).response;
+            return { ...state, ids: response.ids, audioTitles: response.audioTitles, items: response.items }
+        case 'POST_SEARCH_AUDIO_BY_TITLE':
+            const response = action.jsonData;
+            return { ...state, ids: response.ids, audioTitles: response.audioTitles, items: response.items }
         case 'GET_AUDIO_DETAILS':
             return {
-                ...state, response: {
-                    ...state.response, audioTitles: state.response.audioTitles.map(audioTitle =>
-                        expandSelection(audioTitle, action))
-                }
+                ...state, audioTitles: state.audioTitles.map(audioTitle =>
+                    expandSelection(audioTitle, action.selectedId))
             }
         default:
             return state
@@ -30,6 +29,7 @@ const getMockedAudioItems = (text) => {
 
     return {
         response: {
+            ids: ["1-101", "1-102"],
             audioTitles: [
                 {
                     title: "abc-def",
@@ -42,25 +42,28 @@ const getMockedAudioItems = (text) => {
                     expand: false
                 }
             ],
-
-            items: [
-                {
-                    id: "1-101",
-                    title: "abc-def",
-                    description: "desc some text",
-                    type: "radioSeries",
-                    publisher: "yle-radio-service",
-                    downloadable: true
-                },
-                {
-                    id: "1-102",
-                    title: "abc-def",
-                    description: "desc some text",
-                    type: "radioSeries",
-                    publisher: "yle-radio-service",
-                    downloadable: true
+            items: {
+                byId: {
+                    "1-101":
+                    {
+                        id: "1-101",
+                        title: "abc-def",
+                        description: "desc some text",
+                        type: "radioSeries",
+                        publisher: "yle-radio-service",
+                        downloadable: true
+                    },
+                    "1-102":
+                    {
+                        id: "1-102",
+                        title: "abc-def",
+                        description: "desc some text",
+                        type: "radioSeries",
+                        publisher: "yle-radio-service",
+                        downloadable: true
+                    }
                 }
-            ]
+            }
         }
     }
 }

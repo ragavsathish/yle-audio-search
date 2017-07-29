@@ -16,10 +16,10 @@ const AudioTitles = ({ audioTitles, onTitleClick }) => (
 )
 
 AudioTitles.propTypes = {
-  titles: PropTypes.arrayOf(PropTypes.shape({
+  audioTitles: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    enable: PropTypes.bool.isRequired
+    expand: PropTypes.bool.isRequired
   }).isRequired).isRequired,
   onTitleClick: PropTypes.func.isRequired
 }
