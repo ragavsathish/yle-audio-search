@@ -3,22 +3,23 @@ import PropTypes from 'prop-types'
 import AudioTitle from './AudioTitle'
 
 const AudioTitles = ({ audioTitles, onTitleClick }) => (
-  <ul>
-    {audioTitles.map(title =>
+  <div>
+    {audioTitles.map(audioTitle =>
       <AudioTitle
-        key={title.id}
-        {...title}
+        key={audioTitle.id}
+        {...audioTitle}
         onClick={onTitleClick}
       />
-      
+
     )}
-  </ul>
+  </div>
 )
 
 AudioTitles.propTypes = {
   titles: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    enable: PropTypes.bool.isRequired
   }).isRequired).isRequired,
   onTitleClick: PropTypes.func.isRequired
 }

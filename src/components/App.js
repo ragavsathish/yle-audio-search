@@ -1,13 +1,17 @@
 import React from 'react'
 import SearchAudio from '../containers/SearchAudio'
 import ListAudioTitles from '../containers/ListAudioTitles'
-import DescribeAudioItem from '../containers/DescribeAudioItem'
+
+import '../stylesheets/App.css';
+import logo from '../images/bg-text.png';
 
 const App = () => (
   <div>
+    <div className="App-logo">
+      <img src={logo} alt=""></img>
+    </div>
     <SearchAudio />
     <ListAudioTitles />
-    <DescribeAudioItem />
   </div>
 )
 

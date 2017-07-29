@@ -1,13 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { searchAudioTitles } from '../actions'
+import '../stylesheets/App.css';
 
 let SearchAudio = ({ dispatch }) => {
     let input
 
     return (
         <div>
-            <form onSubmit={e => {
+            <form className="SearchAudio-form" onSubmit={e => {
                 e.preventDefault()
                 if (!input.value.trim()) {
                     return
@@ -15,10 +16,10 @@ let SearchAudio = ({ dispatch }) => {
                 dispatch(searchAudioTitles(input.value))
                 
             }}>
-                <input ref={node => {
+                <input className="SearchAudio-text"  ref={node => {
                     input = node
                 }} />
-                <button type="submit">
+                <button className="SearchAudio-button" type="submit">
                     Search
         </button>
             </form>
