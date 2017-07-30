@@ -4,7 +4,7 @@ import reduxApi from "../middleware/api"
 const expandSelection = (audioTitle, selectedId) => {
     if (selectedId !== audioTitle.id)
         return { ...audioTitle, expand: false }
-    return { ...audioTitle, expand: !audioTitle.expand };
+    return { ...audioTitle, expand: !audioTitle.expand }
 }
 
 const audioItems = (state = { ids: [], audioTitles: [], items: [] }, action) => {

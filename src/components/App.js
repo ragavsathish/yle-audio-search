@@ -1,6 +1,6 @@
-import React from 'react'
-import SearchAudio from '../containers/SearchAudio'
-import ListAudioTitles from '../containers/ListAudioTitles'
+import React from 'react';
+import SearchAudio from '../containers/SearchAudio';
+import ListAudioTitles from '../containers/ListAudioTitles';
 
 import '../stylesheets/App.css';
 import logo from '../images/bg-text.png';

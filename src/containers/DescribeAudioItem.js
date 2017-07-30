@@ -1,6 +1,5 @@
-import { connect } from 'react-redux'
-
-import AudioItem from "../components/AudioItem"
+import { connect } from 'react-redux';
+import AudioItem from "../components/AudioItem";
 
 const getAudioItem = (state) => {
   let title = state.audioItems.audioTitles.filter(t => t.expand === true);
