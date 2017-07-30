@@ -1,6 +1,6 @@
 import reduxApi from "redux-api";
-import map from "lodash/map";
 import { postSearchAudioTitles } from '../actions'
+import adapterFetch from "redux-api/lib/adapters/fetch";
 
 const API_ROOT = 'https://external.api.yle.fi'
 const API_ID = 'd4f225af'
@@ -12,11 +12,11 @@ const headers = {
 
 export default reduxApi({
     getItems: {
-        url: `${API_ROOT}/v1/programs/items.json?app_id=${API_ID}&app_key=${APP_KEY}&availability=ondemand&mediaobject=audio&limit=10&q:searchText`,
+        url: `${API_ROOT}/v1/programs/items.json?app_id=${API_ID}&app_key=${APP_KEY}&availability=ondemand&mediaobject=audio&limit=10&q=q:searchText`,
         options: { headers },
         cache: { expire: 5000 },
         transformer(data) {
-            return itemsTransformer(data.json());
+            return (data) => itemsTransformer(data.json());
         },
         postfetch: [
             function ({ data, actions, dispatch, getState, request }) {
@@ -24,35 +24,38 @@ export default reduxApi({
             }
         ]
     }
-});
+}).use("fetch", adapterFetch(fetch));
 
-const itemsTransformer = (data) => {
+export const itemsTransformer = (data) => {
     const response = { ids: [], audioTiltes: [], items: [] };
 
     return {
         ...response, ids: data.map((d) => d.id),
         audioTiltes: data.map((d) => {
-            title: d.title.fi;
-            id: d.id;
-            expand: false;
+            return {
+            title: d.title.fi,
+            id: d.id,
+            expand: false,
+            }
         }), items: {
             byId: generateItemMap(data)
         }
     }
 }
 
-const generateItemMap = (data) => {
+export const generateItemMap = (data) => {
     const itemDataById = {};
+
     data.forEach((d) => {
-        itemDataById[d.id] = (d) => {
-            return {
-                id = d.id,
+        itemDataById[d.id] = {
+                id: d.id,
                 description: d.description.fi,
+                title: d.title.fi,
                 type: d.type,
-                publisher: d.publicationEvent[1].publisher.id,
-                downloadable: d.publicationEvent[1].downloadable,
+                publisher: d.publicationEvent[d.publicationEvent.length - 1].publisher[0].id,
+                downloadable: d.publicationEvent[d.publicationEvent.length - 1].downloadable
             }
-        };
-    });
+        }
+    )
     return itemDataById;
 }

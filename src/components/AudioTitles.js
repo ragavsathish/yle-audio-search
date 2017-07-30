@@ -4,7 +4,8 @@ import AudioTitle from './AudioTitle'
 
 const AudioTitles = ({ audioTitles, onTitleClick }) => (
   <div>
-    {audioTitles.map(audioTitle =>
+
+    { audioTitles !== undefined && audioTitles.length !== 0 && audioTitles.map(audioTitle =>
       <AudioTitle
         key={audioTitle.id}
         {...audioTitle}

@@ -1,15 +1,17 @@
+import { combineReducers } from "redux";
+import reduxApi from "../middleware/api"
+
 const expandSelection = (audioTitle, selectedId) => {
     if (selectedId !== audioTitle.id)
         return { ...audioTitle, expand: false }
     return { ...audioTitle, expand: !audioTitle.expand };
 }
 
-
 const audioItems = (state = { ids: [], audioTitles: [], items: [] }, action) => {
     switch (action.type) {
         case 'SEARCH_AUDIO_BY_TITLE':
-            const response = getMockedAudioItems(action.searchText).response;
-            return { ...state, ids: response.ids, audioTitles: response.audioTitles, items: response.items }
+            const jsonData = getMockedAudioItems(action.searchText).response;
+            return { ...state, ids: jsonData.ids, audioTitles: jsonData.audioTitles, items: jsonData.items }
         case 'POST_SEARCH_AUDIO_BY_TITLE':
             const response = action.jsonData;
             return { ...state, ids: response.ids, audioTitles: response.audioTitles, items: response.items }
@@ -23,7 +25,12 @@ const audioItems = (state = { ids: [], audioTitles: [], items: [] }, action) => 
     }
 }
 
-export default audioItems
+const audioFinderApp = combineReducers({
+    audioItems: audioItems,
+    rest: reduxApi.reducers
+});
+
+export default audioFinderApp
 
 const getMockedAudioItems = (text) => {
 
