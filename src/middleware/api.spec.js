@@ -50,15 +50,16 @@ const MOCK_JSON_DATA = {
         "id": "1-123457",
         "type": "RadioSeries",
         "publicationEvent": [
-        {
-            "publisher": [
+        	{"bla": "bla"},
+        	{"foo": "boo"},
+            { "publisher": [
               {
                 "id": "yle-radio-vega"
               }
-        ],
-        "downloadable" :true
-    	}
-       ] 
-      
-}]
+        	],
+        	"downloadable" :true
+        	}
+    	]
+       }
+	]
 }

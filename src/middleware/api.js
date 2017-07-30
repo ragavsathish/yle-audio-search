@@ -1,5 +1,5 @@
 import reduxApi from "redux-api";
-import { postSearchAudioTitles } from '../actions'
+import { postFetchAudioTitles } from '../actions'
 import adapterFetch from "redux-api/lib/adapters/fetch";
 
 const API_ROOT = 'https://external.api.yle.fi'
@@ -16,11 +16,11 @@ export default reduxApi({
         options: { headers },
         cache: { expire: 5000 },
         transformer(data) {
-            return (data) => itemsTransformer(data.json());
+            return (data) => itemsTransformer(data.json().data);
         },
         postfetch: [
             function ({ data, actions, dispatch, getState, request }) {
-                dispatch(postSearchAudioTitles(data));
+                dispatch(postFetchAudioTitles(data));
             }
         ]
     }

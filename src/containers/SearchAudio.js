@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { searchAudioTitles } from '../actions'
+import reduxApi from "../middleware/api"
 import '../stylesheets/App.css';
 
 let SearchAudio = ({ dispatch }) => {
@@ -13,7 +13,7 @@ let SearchAudio = ({ dispatch }) => {
                 if (!input.value.trim()) {
                     return
                 }
-                dispatch(searchAudioTitles(input.value))
+                dispatch(reduxApi.actions.getItems({searchText: input.value}))
                 
             }}>
                 <input className="SearchAudio-text"  ref={node => {

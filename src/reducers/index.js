@@ -12,8 +12,9 @@ const audioItems = (state = { ids: [], audioTitles: [], items: [] }, action) => 
         case 'SEARCH_AUDIO_BY_TITLE':
             const jsonData = getMockedAudioItems(action.searchText).response;
             return { ...state, ids: jsonData.ids, audioTitles: jsonData.audioTitles, items: jsonData.items }
-        case 'POST_SEARCH_AUDIO_BY_TITLE':
+        case 'POST_FETCH_AUDIO_BY_TITLE':
             const response = action.jsonData;
+            console.log(response);
             return { ...state, ids: response.ids, audioTitles: response.audioTitles, items: response.items }
         case 'GET_AUDIO_DETAILS':
             return {

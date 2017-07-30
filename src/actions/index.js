@@ -8,7 +8,7 @@ export const getAudioDetails = (selectedId) => ({
     selectedId
 })
 
-export const postSearchAudioTitles = (jsonData) => ({
-    type: 'POST_SEARCH_AUDIO_BY_TITLE',
+export const postFetchAudioTitles = (jsonData) => ({
+    type: 'POST_FETCH_AUDIO_BY_TITLE',
     jsonData
 })
