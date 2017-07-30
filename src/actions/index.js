@@ -1,14 +1,10 @@
-export const searchAudioTitles = (searchText) => ({
-    type: 'SEARCH_AUDIO_BY_TITLE',
-    searchText
+export const processGetItemsResponse = (jsonData) => ({
+    type: 'PROCESS_GET_ITEMS_RESPONSE',
+    jsonData
 })
 
-export const getAudioDetails = (selectedId) => ({
-    type: 'GET_AUDIO_DETAILS',
+export const getAudioItem = (selectedId) => ({
+    type: 'GET_AUDIO_ITEM',
     selectedId
 })
 
-export const postFetchAudioTitles = (jsonData) => ({
-    type: 'POST_FETCH_AUDIO_BY_TITLE',
-    jsonData
-})

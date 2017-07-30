@@ -9,28 +9,20 @@ class AudioItem extends React.Component {
             <table>
                 <tbody>
                     <tr>
-                        <td>id</td>
-                        <td>{audioItem.id}</td>
-                    </tr>
-                    <tr>
-                        <td>title</td>
-                        <td>{audioItem.title}</td>
-                    </tr>
-                    <tr>
-                        <td>description</td>
+                        <td>Description</td>
                         <td>{audioItem.description}</td>
                     </tr>
                     <tr>
-                        <td>type</td>
+                        <td>Type</td>
                         <td>{audioItem.type}</td>
                     </tr>
                     <tr>
-                        <td>publisher</td>
+                        <td>Publisher</td>
                         <td>{audioItem.publisher}</td>
                     </tr>
                     <tr>
-                        <td>downloadable</td>
-                        <td>{audioItem.downloadable}</td>
+                        <td>Downloadable</td>
+                        <td>{audioItem.downloadable.toString()}</td>
                     </tr>
                 </tbody>
             </table>

@@ -1,5 +1,5 @@
 import reduxApi from "redux-api";
-import { postFetchAudioTitles } from '../actions'
+import { processGetItemsResponse } from '../actions'
 import fetchJsonp from 'fetch-jsonp';
 
 const API_ROOT = 'https://external.api.yle.fi'
@@ -27,7 +27,7 @@ export default reduxApi({
         },
         postfetch: [
             function ({ data, actions, dispatch, getState, request }) {
-                dispatch(postFetchAudioTitles(data));
+                dispatch(processGetItemsResponse(data));
             }
         ]
     }
@@ -37,19 +37,23 @@ export const itemsTransformer = (data) => {
     const response = { ids: [], audioTitles: [], items: [] };
 
     return {
-        ...response, 
+        ...response,
         ids: data.map((d) => d.id),
-        audioTitles: data.map((d) => {
-            return {
-                title: d.title.fi,
-                id: d.id,
-                expand: false,
-            }
-        }),
+        audioTitles: generateAudioTitles(data),
         items: {
             byId: generateItemMap(data)
         }
     }
+}
+
+export const generateAudioTitles = (data) => {
+    return data.map((d) => {
+        return {
+            title: d.title.fi ? d.title.fi : d.title.sv,
+            id: d.id,
+            expand: false,
+        }
+    })
 }
 
 export const generateItemMap = (data) => {
@@ -58,8 +62,7 @@ export const generateItemMap = (data) => {
     data.forEach((d) => {
         itemDataById[d.id] = {
             id: d.id,
-            description: d.description.fi,
-            title: d.title.fi,
+            description: getDescripition(d.description),
             type: d.type,
             publisher: getPublisher(d.publicationEvent),
             downloadable: isDownloadable(d.publicationEvent)
@@ -69,15 +72,15 @@ export const generateItemMap = (data) => {
 }
 
 export const getDescripition = (description) => {
-    return description.fi !== undefined ? description.fi : description.sv;
+    return description.fi ? description.fi : description.sv;
 }
 
 export const getPublisher = (publicationEvent) => {
-    const node = publicationEvent[publicationEvent.length - 1];
-    return node === undefined ? 'Not availabile' : node.publisher[0].id;
+    const node = publicationEvent.filter((event) => event.publisher);
+    return !node[0] ? 'Not availabile' : node[0].publisher[0].id;
 }
 
 export const isDownloadable = (publicationEvent) => {
-    const node = publicationEvent[publicationEvent.length - 1];
-    return node === undefined ? 'Not availabile' : node.downloadable;
+    const node = publicationEvent.filter((event) => event.media && event.media.downloadable !== undefined);
+    return !node[0] ? 'Not availabile' :  node[0].media.downloadable;
 }

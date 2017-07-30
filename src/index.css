@@ -6,7 +6,7 @@ body {
 table {
     border-collapse: collapse;
     width: 80%;
-    font-size: 14px;
+    font-size: 12px;
     margin: 20px auto 2px;
     background: white;
 }
@@ -16,4 +16,5 @@ td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    vertical-align: top;
 }

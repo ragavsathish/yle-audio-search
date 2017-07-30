@@ -1,19 +1,14 @@
 import { connect } from 'react-redux'
-import { getAudioDetails } from '../actions'
+import { getAudioItem } from '../actions'
 import AudioTitles from '../components/AudioTitles'
 
-const debugState = (state) => {
-	console.log(state);
-	return state.audioItems.audioTitles;
-}
-
 const mapStateToProps = (state) => ({
-  audioTitles: debugState(state)
+  audioTitles: state.audioItems.audioTitles
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onTitleClick: (id) => {
-    dispatch(getAudioDetails(id))
+    dispatch(getAudioItem(id))
   }
 })
 

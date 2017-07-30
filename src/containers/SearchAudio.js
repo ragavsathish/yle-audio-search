@@ -13,15 +13,15 @@ let SearchAudio = ({ dispatch }) => {
                 if (!input.value.trim()) {
                     return
                 }
-                dispatch(reduxApi.actions.getItems({searchText: input.value}))
-                
+                dispatch(reduxApi.actions.getItems({ searchText: input.value }))
+
             }}>
-                <input className="SearchAudio-text"  ref={node => {
+                <input className="SearchAudio-text" ref={node => {
                     input = node
                 }} />
                 <button className="SearchAudio-button" type="submit">
                     Search
-        </button>
+                </button>
             </form>
         </div>
     )
