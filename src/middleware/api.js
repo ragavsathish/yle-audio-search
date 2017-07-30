@@ -27,11 +27,11 @@ export default reduxApi({
 }).use("fetch", adapterFetch(fetch));
 
 export const itemsTransformer = (data) => {
-    const response = { ids: [], audioTiltes: [], items: [] };
+    const response = { ids: [], audioTitles: [], items: [] };
 
     return {
         ...response, ids: data.map((d) => d.id),
-        audioTiltes: data.map((d) => {
+        audioTitles: data.map((d) => {
             return {
             title: d.title.fi,
             id: d.id,
