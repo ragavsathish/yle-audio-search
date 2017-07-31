@@ -15,7 +15,7 @@ const AudioTitle = ({ onClick, title, id, expand }) => (
                 onClick(id)
             }} />
         </div>
-        { expand && <DescribeAudioItem /> }
+        {expand && <DescribeAudioItem />}
     </div>
 )
 

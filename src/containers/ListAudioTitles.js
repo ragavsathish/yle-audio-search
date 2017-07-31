@@ -3,7 +3,7 @@ import { getAudioItem } from '../actions';
 import AudioTitles from '../components/AudioTitles';
 
 const mapStateToProps = (state) => ({
-  audioTitles: state.audioItems.audioTitles
+  audioItems: state.audioItems.items
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
