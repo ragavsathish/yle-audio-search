@@ -10,8 +10,8 @@ const expandSelection = (item, selectedId) => {
 const audioItems = (state = { items: [], totalCount: [], fetchComplete: false}, action) => {
     switch (action.type) {
         case 'PROCESS_GET_ITEMS_RESPONSE':
-            const result = action.jsonData;
-            return { ...state, items: result.items, totalCount: result.totalCount, fetchComplete: true};
+            const newState = {...state, ...action.jsonData};
+            return { ...newState, fetchComplete: true};
         case 'GET_AUDIO_ITEM':
             return {
                 ...state, items: state.items.map(item =>

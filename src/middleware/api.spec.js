@@ -1,22 +1,22 @@
 import * as api from './api'
 
-describe('YLE api utility methods', () => {
+describe("YLE api utility methods", () => {
 
-  it('should apply itemsTransformer for api response', () => {
-    expect(api.itemsTransformer(MOCK_API_VALID_RESPONSE)).toEqual(EXPECTED_RESULT_FOR_VALID_RESPONSE);
+  it("should apply itemsTransformer for api response", () => {
+    expect(api.itemsTransformer(MOCK_API_VALID_RESPONSE, "search")).toEqual(EXPECTED_RESULT_FOR_VALID_RESPONSE);
   });
 
-  it('should getDescription from response data', () => {
+  it("should getDescription from response data", () => {
     expect(api.getDescripition({ fi: "finnish text", sv: "swedish text" })).toEqual("finnish text");
     expect(api.getDescripition({ sv: "swedish text" })).toEqual("swedish text");
   });
 
-  it('should getPublisher from response data', () => {
+  it("should getPublisher from response data", () => {
     expect(api.getPublisher([{}])).toEqual("Not availabile");
     expect(api.getPublisher([{}, {}, { publisher: [{ id: "publisher text" }] }])).toEqual("publisher text");
   });
 
-  it('get isDownloadable from response data', () => {
+  it("get isDownloadable from response data", () => {
     expect(api.isDownloadable([{}])).toEqual("Not availabile");
     expect(api.isDownloadable([{ media: { downloadable: true } }])).toEqual(true);
   });
@@ -86,6 +86,7 @@ const EXPECTED_RESULT_FOR_VALID_RESPONSE = {
   items: [
     { id: "1-123456", title: "first title", expand: false, description: "describe first", type: "RadioSeries", publisher: "yle-radio-vega", downloadable: false },
     { id: "1-123457", title: "second title", expand: false, description: "describe second", type: "RadioSeries", publisher: "yle-radio-vega", downloadable: true }],
-  totalCount: 5
+  totalCount: 5,
+  query: "search"
 };
 

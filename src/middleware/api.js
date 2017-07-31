@@ -23,7 +23,7 @@ export default reduxApi({
         cache: { expire: 5000 },
         transformer(response) {
             if (!response) return {};
-            return itemsTransformer(response);
+            return itemsTransformer(response, `:searchText`);
         },
         postfetch: [
             function ({ data, actions, dispatch, getState, request }) {
@@ -33,8 +33,8 @@ export default reduxApi({
     }
 }).use("fetch", adapterFetchJsonp);
 
-export const itemsTransformer = (response) => {
-    const result = {items: [], totalCount: []};
+export const itemsTransformer = (response, searchText) => {
+    const result = {items: [], totalCount: [], query: searchText};
 
     return {
         ...result,
