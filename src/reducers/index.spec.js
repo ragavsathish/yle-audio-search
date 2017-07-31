@@ -4,12 +4,12 @@ describe('reducer', () => {
     it('should handle initial state', () => {
         expect(
             audioFinderApp(undefined, {})
-        ).toEqual({ audioItems: { items: [], totalCount: [], fetchComplete: [] } });
+        ).toEqual({ audioItems: { items: [], totalCount: [], fetchComplete: false } });
     })
 
     it('should handle PROCESS_GET_ITEMS_RESPONSE', () => {
         expect(
-            audioFinderApp({ audioItems: { items: [], totalCount: [], fetchComplete: [] } }, {
+            audioFinderApp({ audioItems: { items: [], totalCount: [], fetchComplete: false } }, {
                 type: 'PROCESS_GET_ITEMS_RESPONSE',
                 jsonData: MOCKED_AUDIO_ITEMS
             })).toEqual({ audioItems: { items: MOCKED_AUDIO_ITEMS.items, totalCount: MOCKED_AUDIO_ITEMS.totalCount, fetchComplete: true } });

@@ -7,7 +7,7 @@ const expandSelection = (item, selectedId) => {
     return { ...item, expand: !item.expand }
 }
 
-const audioItems = (state = { items: [], totalCount: [], fetchComplete: [] }, action) => {
+const audioItems = (state = { items: [], totalCount: [], fetchComplete: false}, action) => {
     switch (action.type) {
         case 'PROCESS_GET_ITEMS_RESPONSE':
             const result = action.jsonData;

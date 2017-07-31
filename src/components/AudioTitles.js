@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import AudioTitle from './AudioTitle';
 
-const AudioTitles = ({ audioItems, onTitleClick }) => (
+const AudioTitles = ({ audioItems, message, fetchComplete, onTitleClick }) => (
   <div>
-
-    {audioItems !== undefined && audioItems.length !== 0 && audioItems.map(item =>
+    {fetchComplete && <div className="AudioTitles-search-message"> {message} </div>}
+    {audioItems.map(item =>
       <AudioTitle
         key={item.id}
         {...item}
@@ -21,7 +21,9 @@ AudioTitles.propTypes = {
     title: PropTypes.string.isRequired,
     expand: PropTypes.bool.isRequired,
   }).isRequired).isRequired,
-  onTitleClick: PropTypes.func.isRequired
+  message: PropTypes.string.isRequired,
+  fetchComplete: PropTypes.bool.isRequired,
+  onTitleClick: PropTypes.func.isRequired,
 }
 
 export default AudioTitles
