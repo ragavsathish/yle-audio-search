@@ -1,31 +1,31 @@
-import audioFinderApp from './index'
+import audioFinderApp from "./index"
 
-describe('reducer', () => {
-    it('should handle initial state', () => {
+describe("reducer", () => {
+    it("should handle initial state", () => {
         expect(
             audioFinderApp(undefined, {})
         ).toEqual({ audioItems: { items: [], totalCount: [], fetchComplete: false } });
     })
 
-    it('should handle PROCESS_GET_ITEMS_RESPONSE', () => {
+    it("should handle PROCESS_GET_ITEMS_RESPONSE", () => {
         expect(
             audioFinderApp({ audioItems: { items: [], totalCount: [], fetchComplete: false } }, {
-                type: 'PROCESS_GET_ITEMS_RESPONSE',
+                type: "PROCESS_GET_ITEMS_RESPONSE",
                 jsonData: MOCKED_AUDIO_ITEMS
             })).toEqual({audioItems : {...MOCKED_AUDIO_ITEMS, fetchComplete: true }});
 
     })
 
-    it('should handle GET_AUDIO_ITEM', () => {
+    it("should handle GET_AUDIO_ITEM", () => {
         expect(
             audioFinderApp({ audioItems: { items: [{ id: "123", expand: false }, { id: "456", expand: false }] } }, {
-                type: 'GET_AUDIO_ITEM',
+                type: "GET_AUDIO_ITEM",
                 selectedId: "123"
             })).toEqual({ audioItems: { items: [{ id: "123", expand: true }, { id: "456", expand: false }] } });
 
         expect(
             audioFinderApp({ audioItems: { items: [{ id: "123", expand: true }, { id: "456", expand: false }] } }, {
-                type: 'GET_AUDIO_ITEM',
+                type: "GET_AUDIO_ITEM",
                 selectedId: "456"
             })).toEqual({ audioItems: { items: [{ id: "123", expand: false }, { id: "456", expand: true }] } });
 

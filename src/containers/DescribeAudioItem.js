@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import AudioItem from "../components/AudioItem";
 
 const getAudioItem = (state) => {

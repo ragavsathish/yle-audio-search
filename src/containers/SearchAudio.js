@@ -1,7 +1,7 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 import reduxApi from "../middleware/api";
-import '../stylesheets/App.css';
+import "../stylesheets/App.css";
 
 let SearchAudio = ({ dispatch }) => {
     let input

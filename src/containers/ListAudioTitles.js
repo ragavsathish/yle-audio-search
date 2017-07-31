@@ -1,6 +1,6 @@
-import { connect } from 'react-redux';
-import { getAudioItem } from '../actions';
-import AudioTitles from '../components/AudioTitles';
+import { connect } from "react-redux";
+import { getAudioItem } from "../actions";
+import AudioTitles from "../components/AudioTitles";
 
 const mapStateToProps = (state) => ({
   audioItems: state.audioItems.items,

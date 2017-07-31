@@ -1,10 +1,10 @@
 import reduxApi from "redux-api";
-import { processGetItemsResponse } from '../actions'
-import fetchJsonp from 'fetch-jsonp';
+import { processGetItemsResponse } from "../actions"
+import fetchJsonp from "fetch-jsonp";
 
-const API_ROOT = 'https://external.api.yle.fi';
-const API_ID = 'd4f225af';
-const APP_KEY = 'c5c5c163897a5711d68ed6fc30c54027';
+const API_ROOT = "https://external.api.yle.fi";
+const API_ID = "d4f225af";
+const APP_KEY = "c5c5c163897a5711d68ed6fc30c54027";
 
 const headers = {
     "User-Agent": "redux-api"
@@ -13,7 +13,7 @@ const headers = {
 const adapterFetchJsonp = (url, opts) => {
     return fetchJsonp(url, opts)
         .then((resp) => resp.json())
-        .catch((ex) => { console.log('Exception in fetching from API', ex); });
+        .catch((ex) => { console.log("Exception in fetching from API", ex); });
 }
 
 export default reduxApi({
@@ -63,10 +63,10 @@ export const getDescripition = (description) => {
 
 export const getPublisher = (publicationEvent) => {
     const node = publicationEvent.filter((event) => event.publisher);
-    return !node[0] ? 'Not availabile' : node[0].publisher[0].id;
+    return !node[0] ? "Not availabile" : node[0].publisher[0].id;
 }
 
 export const isDownloadable = (publicationEvent) => {
     const node = publicationEvent.filter((event) => event.media && event.media.downloadable !== undefined);
-    return !node[0] ? 'Not availabile' :  node[0].media.downloadable;
+    return !node[0] ? "Not availabile" :  node[0].media.downloadable;
 }

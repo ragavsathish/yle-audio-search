@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import AudioTitle from './AudioTitle';
+import React from "react";
+import PropTypes from "prop-types";
+import AudioTitle from "./AudioTitle";
 
 const AudioTitles = ({ audioItems, message, fetchComplete, onTitleClick }) => (
   <div>

@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import DescribeAudioItem from '../containers/DescribeAudioItem';
-import musicLogo from '../images/music-logo.png';
-import expandButton from '../images/expand.png';
-import '../stylesheets/App.css';
+import React from "react";
+import PropTypes from "prop-types";
+import DescribeAudioItem from "../containers/DescribeAudioItem";
+import musicLogo from "../images/music-logo.png";
+import expandButton from "../images/expand.png";
+import "../stylesheets/App.css";
 
 const AudioTitle = ({ onClick, title, id, expand }) => (
     <div className="AudioTitle-row">
