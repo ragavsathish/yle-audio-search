@@ -1,29 +1,42 @@
 import React from "react";
 import { connect } from "react-redux";
 import reduxApi from "../middleware/api";
-import "../stylesheets/App.css";
+import { Navbar, Form, FormGroup, FormControl, Button } from "react-bootstrap";
 
 let SearchAudio = ({ dispatch }) => {
     let input
 
     return (
-        <div>
-            <form className="SearchAudio-form" onSubmit={e => {
-                e.preventDefault()
-                if (!input.value.trim()) {
-                    return
-                }
-                dispatch(reduxApi.actions.getItems({ searchText: input.value }))
+        <Navbar inverse collapseOnSelect>
+            <Navbar.Header>
+                <Navbar.Brand>
+                    <a href="#">YLE Audio Search</a>
+                </Navbar.Brand>
+                <Navbar.Toggle />
+            </Navbar.Header>
+            <Navbar.Collapse>
+                <Navbar.Form pullLeft>
+                    <Form onSubmit={e => {
+                        e.preventDefault()
+                        if (!input.value.trim()) {
+                            return
+                        }
+                        dispatch(reduxApi.actions.getItems({ searchText: input.value }))
 
-            }}>
-                <input className="SearchAudio-text" ref={node => {
-                    input = node
-                }} />
-                <button className="SearchAudio-button" type="submit">
-                    Search
-                </button>
-            </form>
-        </div>
+                    }}>
+                        <FormGroup>
+                            <FormControl type="text" bsClass="form-control" placeholder="Search" inputRef={node => {
+                                input = node
+                            }} />
+
+                        </FormGroup>
+                        {" "}
+                        <Button type="submit">Submit</Button>
+                    </Form>
+                </Navbar.Form>
+            </Navbar.Collapse>
+        </Navbar>
+
     )
 }
 
