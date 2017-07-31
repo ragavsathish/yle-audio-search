@@ -1,10 +1,10 @@
 import reduxApi from "redux-api";
-import { processGetItemsResponse } from '../actions'
-import fetchJsonp from 'fetch-jsonp';
+import { processGetItemsResponse } from "../actions"
+import fetchJsonp from "fetch-jsonp";
 
-const API_ROOT = 'https://external.api.yle.fi'
-const API_ID = 'd4f225af'
-const APP_KEY = 'c5c5c163897a5711d68ed6fc30c54027'
+const API_ROOT = "https://external.api.yle.fi";
+const API_ID = "d4f225af";
+const APP_KEY = "c5c5c163897a5711d68ed6fc30c54027";
 
 const headers = {
     "User-Agent": "redux-api"
@@ -13,7 +13,7 @@ const headers = {
 const adapterFetchJsonp = (url, opts) => {
     return fetchJsonp(url, opts)
         .then((resp) => resp.json())
-        .catch((ex) => { console.log('Exception in fetching from API', ex); });
+        .catch((ex) => { console.log("Exception in fetching from API", ex); });
 }
 
 export default reduxApi({
@@ -21,9 +21,9 @@ export default reduxApi({
         url: `${API_ROOT}/v1/programs/items.json?app_id=${API_ID}&app_key=${APP_KEY}&availability=ondemand&mediaobject=audio&limit=10&q=:searchText`,
         options: { headers },
         cache: { expire: 5000 },
-        transformer(data) {
-            if (!data) return {};
-            return itemsTransformer(data.data);
+        transformer(response) {
+            if (!response) return {};
+            return itemsTransformer(response, `:searchText`);
         },
         postfetch: [
             function ({ data, actions, dispatch, getState, request }) {
@@ -33,42 +33,28 @@ export default reduxApi({
     }
 }).use("fetch", adapterFetchJsonp);
 
-export const itemsTransformer = (data) => {
-    const response = { ids: [], audioTitles: [], items: [] };
+export const itemsTransformer = (response, searchText) => {
+    const result = {items: [], totalCount: [], query: searchText};
 
     return {
-        ...response,
-        ids: data.map((d) => d.id),
-        audioTitles: generateAudioTitles(data),
-        items: {
-            byId: generateItemMap(data)
-        }
-    }
+        ...result,
+        items: getAudioItems(response.data),
+        totalCount: response.meta.count
+    };
 }
 
-export const generateAudioTitles = (data) => {
+export const getAudioItems = (data) => {
     return data.map((d) => {
         return {
             title: d.title.fi ? d.title.fi : d.title.sv,
             id: d.id,
             expand: false,
-        }
-    })
-}
-
-export const generateItemMap = (data) => {
-    const itemDataById = {};
-
-    data.forEach((d) => {
-        itemDataById[d.id] = {
-            id: d.id,
             description: getDescripition(d.description),
             type: d.type,
             publisher: getPublisher(d.publicationEvent),
             downloadable: isDownloadable(d.publicationEvent)
-        }
-    })
-    return itemDataById;
+        };
+    });
 }
 
 export const getDescripition = (description) => {
@@ -77,10 +63,10 @@ export const getDescripition = (description) => {
 
 export const getPublisher = (publicationEvent) => {
     const node = publicationEvent.filter((event) => event.publisher);
-    return !node[0] ? 'Not availabile' : node[0].publisher[0].id;
+    return !node[0] ? "Not availabile" : node[0].publisher[0].id;
 }
 
 export const isDownloadable = (publicationEvent) => {
     const node = publicationEvent.filter((event) => event.media && event.media.downloadable !== undefined);
-    return !node[0] ? 'Not availabile' :  node[0].media.downloadable;
+    return !node[0] ? "Not availabile" :  node[0].media.downloadable;
 }

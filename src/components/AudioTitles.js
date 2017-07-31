@@ -1,28 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import AudioTitle from './AudioTitle';
+import React from "react";
+import PropTypes from "prop-types";
+import AudioTitle from "./AudioTitle";
 
-const AudioTitles = ({ audioTitles, onTitleClick }) => (
+const AudioTitles = ({ audioItems, message, fetchComplete, onTitleClick }) => (
   <div>
-
-    { audioTitles !== undefined && audioTitles.length !== 0 && audioTitles.map(audioTitle =>
+    {fetchComplete && <div className="AudioTitles-search-message"> {message} </div>}
+    {audioItems.map(item =>
       <AudioTitle
-        key={audioTitle.id}
-        {...audioTitle}
+        key={item.id}
+        {...item}
         onClick={onTitleClick}
       />
-
     )}
   </div>
 )
 
 AudioTitles.propTypes = {
-  audioTitles: PropTypes.arrayOf(PropTypes.shape({
+  audioItems: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    expand: PropTypes.bool.isRequired
+    expand: PropTypes.bool.isRequired,
   }).isRequired).isRequired,
-  onTitleClick: PropTypes.func.isRequired
+  message: PropTypes.string.isRequired,
+  fetchComplete: PropTypes.bool.isRequired,
+  onTitleClick: PropTypes.func.isRequired,
 }
 
 export default AudioTitles

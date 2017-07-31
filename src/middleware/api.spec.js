@@ -1,40 +1,33 @@
-import * as api from './api'
+import * as api from "./api"
 
-describe('YLE api utility methods', () => {
+describe("YLE api utility methods", () => {
 
-  it('should generateItemMap from json data', () => {
+  it("should apply itemsTransformer for api response", () => {
+    expect(api.itemsTransformer(MOCK_API_VALID_RESPONSE, "search")).toEqual(EXPECTED_RESULT_FOR_VALID_RESPONSE);
+  });
 
-    expect(api.generateItemMap(VALID_MOCK_JSON_DATA.data)).toEqual(VALID_EXPECTED_ITEMS)
-  })
+  it("should getDescription from response data", () => {
+    expect(api.getDescripition({ fi: "finnish text", sv: "swedish text" })).toEqual("finnish text");
+    expect(api.getDescripition({ sv: "swedish text" })).toEqual("swedish text");
+  });
 
-  it('should apply itemsTransformer for api response', () => {
+  it("should getPublisher from response data", () => {
+    expect(api.getPublisher([{}])).toEqual("Not availabile");
+    expect(api.getPublisher([{}, {}, { publisher: [{ id: "publisher text" }] }])).toEqual("publisher text");
+  });
 
-    expect(api.itemsTransformer(VALID_MOCK_JSON_DATA.data)).toEqual({
-      ids: ["1-123456", "1-123457"],
-      audioTitles: [{ title: "first title", id: "1-123456", expand: false }, { title: "second title", id: "1-123457", expand: false }],
-      items: { byId: VALID_EXPECTED_ITEMS }
-    })
-  })
-
-  it('should getDescription from response data', () => {
-
-    expect(api.getDescripition({ fi: "finnish text", sv: "swedish text" })).toEqual("finnish text")
-    expect(api.getDescripition({ sv: "swedish text" })).toEqual("swedish text")
-
-  })
-  it('should getPublisher from response data', () => {
-
-    expect(api.getPublisher([{}])).toEqual("Not availabile")
-    expect(api.getPublisher([{}, {}, { publisher: [{ id: "publisher text" }] }])).toEqual("publisher text")
-  })
-
-  it('get isDownloadable from response data', () => {
-    expect(api.isDownloadable([{}])).toEqual("Not availabile")
-    expect(api.isDownloadable([{ media: { downloadable: true } }])).toEqual(true)
-  })
+  it("get isDownloadable from response data", () => {
+    expect(api.isDownloadable([{}])).toEqual("Not availabile");
+    expect(api.isDownloadable([{ media: { downloadable: true } }])).toEqual(true);
+  });
 })
 
-const VALID_MOCK_JSON_DATA = {
+const MOCK_API_VALID_RESPONSE = {
+
+  meta: {
+    "count": 5
+  },
+
   data: [
     {
       "description": {
@@ -89,8 +82,11 @@ const VALID_MOCK_JSON_DATA = {
   ]
 }
 
-const VALID_EXPECTED_ITEMS = {
-  "1-123456": { id: "1-123456", description: "describe first", type: "RadioSeries", publisher: "yle-radio-vega", downloadable: false },
-  "1-123457": { id: "1-123457", description: "describe second", type: "RadioSeries", publisher: "yle-radio-vega", downloadable: true }
+const EXPECTED_RESULT_FOR_VALID_RESPONSE = {
+  items: [
+    { id: "1-123456", title: "first title", expand: false, description: "describe first", type: "RadioSeries", publisher: "yle-radio-vega", downloadable: false },
+    { id: "1-123457", title: "second title", expand: false, description: "describe second", type: "RadioSeries", publisher: "yle-radio-vega", downloadable: true }],
+  totalCount: 5,
+  query: "search"
 };
 

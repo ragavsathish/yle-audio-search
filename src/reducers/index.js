@@ -1,24 +1,24 @@
 import { combineReducers } from "redux";
 import reduxApi from "../middleware/api"
 
-const expandSelection = (audioTitle, selectedId) => {
-    if (selectedId !== audioTitle.id)
-        return { ...audioTitle, expand: false }
-    return { ...audioTitle, expand: !audioTitle.expand }
+const expandSelection = (item, selectedId) => {
+    if (item.id !== selectedId) 
+        return { ...item, expand: false };
+    return { ...item, expand: !item.expand }
 }
 
-const audioItems = (state = { ids: [], audioTitles: [], items: [] }, action) => {
+const audioItems = (state = { items: [], totalCount: [], fetchComplete: false}, action) => {
     switch (action.type) {
-        case 'PROCESS_GET_ITEMS_RESPONSE':
-            const response = action.jsonData;
-            return { ...state, ids: response.ids, audioTitles: response.audioTitles, items: response.items }
-        case 'GET_AUDIO_ITEM':
+        case "PROCESS_GET_ITEMS_RESPONSE":
+            const newState = {...state, ...action.jsonData};
+            return { ...newState, fetchComplete: true};
+        case "GET_AUDIO_ITEM":
             return {
-                ...state, audioTitles: state.audioTitles.map(audioTitle =>
-                    expandSelection(audioTitle, action.selectedId))
-            }
+                ...state, items: state.items.map(item =>
+                    expandSelection(item, action.selectedId))
+            };
         default:
-            return state
+            return state;
     }
 }
 

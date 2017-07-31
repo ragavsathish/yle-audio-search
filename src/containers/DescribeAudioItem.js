@@ -1,9 +1,8 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import AudioItem from "../components/AudioItem";
 
 const getAudioItem = (state) => {
-  let title = state.audioItems.audioTitles.filter(t => t.expand === true);
-  return title.length === 0 ? [] : state.audioItems.items.byId[title[0].id];
+  return state.audioItems.items.filter(item => item.expand === true)[0];
 }
 
 const mapStateToProps = (state) => ({
