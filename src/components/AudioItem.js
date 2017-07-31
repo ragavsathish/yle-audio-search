@@ -1,4 +1,5 @@
 import React from "react";
+import {Table} from "react-bootstrap";
 
 class AudioItem extends React.Component {
 
@@ -6,7 +7,7 @@ class AudioItem extends React.Component {
         const audioItem = this.props.audioItem;
         let isEmpty = audioItem === undefined || audioItem.length === 0;
         return isEmpty ? <div></div> :
-            <table>
+            <Table striped bordered condensed hover>
                 <tbody>
                     <tr>
                         <td>Description</td>
@@ -25,7 +26,7 @@ class AudioItem extends React.Component {
                         <td>{audioItem.downloadable.toString()}</td>
                     </tr>
                 </tbody>
-            </table>
+            </Table>
     }
 }
 

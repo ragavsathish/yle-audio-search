@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import DescribeAudioItem from "../containers/DescribeAudioItem";
 import musicLogo from "../images/music-logo.png";
 import expandButton from "../images/expand.png";
+import {Panel} from "react-bootstrap";
 import "../stylesheets/App.css";
 
 const AudioTitle = ({ onClick, title, id, expand }) => (
-    <div className="AudioTitle-row">
+    <Panel>
         <div>
             <img src={musicLogo} className="AudioTitle-music-log" alt="" />
             <span className="AudioTitle-text"> {title} </span>
@@ -16,7 +17,7 @@ const AudioTitle = ({ onClick, title, id, expand }) => (
             }} />
         </div>
         {expand && <DescribeAudioItem />}
-    </div>
+    </Panel>
 )
 
 AudioTitle.propTypes = {
