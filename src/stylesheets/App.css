@@ -1,4 +1,8 @@
- 
+ .AudioTitle-container:hover{
+     cursor: hand;
+     cursor: pointer;
+ }
+
 .AudioTitle-music-log{
     height: 50px; 
     width: 50px;
@@ -7,8 +11,4 @@
 .AudioTitle-text {
     position: relative;
     top : -20px; left: 20px
-}
-
-.AudioTitle-expand-button{
-    height: 50px; width: 50px; float:right
 }

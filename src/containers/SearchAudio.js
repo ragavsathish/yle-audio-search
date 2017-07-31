@@ -10,7 +10,7 @@ let SearchAudio = ({ dispatch }) => {
         <Navbar inverse collapseOnSelect>
             <Navbar.Header>
                 <Navbar.Brand>
-                    <a href="#">YLE Audio Search</a>
+                    <a href="http://developer.yle.fi/index.en.html" target="_blank"  rel="noopener noreferrer">YLE Audio Search</a>
                 </Navbar.Brand>
                 <Navbar.Toggle />
             </Navbar.Header>
